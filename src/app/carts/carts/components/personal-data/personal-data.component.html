@@ -1,0 +1,39 @@
+<div id="order">
+  <div class="alert alert-success text-center h2" *ngIf="showsuccess"  role="alert"><strong>well done!</strong>your order is successfully send</div> 
+  <div class="alert alert-danger text-center h2" *ngIf="showfaild"  role="alert"><strong>well done!</strong>your order  faild to send</div> 
+  <h1 class="title1">order</h1>
+  <form #onlineOrder="ngForm" (ngSubmit)="sendOrder()">
+    <div class="">
+      <input type="text" class="inp_box" placeholder="Name" required [(ngModel)]="orderOnline.nameClient"
+        [ngModelOptions]="{standalone:true}" #nameClient="ngModel">
+      <p class="text-center h4 mt-1 m-0 p-0">
+        <small class="text-danger" *ngIf="nameClient.invalid && (nameClient.dirty || nameClient.touched)">Name is
+          required</small>
+      </p>
+    </div>
+    <div class="">
+      <input type="text" class="inp_box" placeholder="Number" #phoneClient="ngModel" required
+        pattern="(011|010|015|012)[0-9]{8}" [(ngModel)]="orderOnline.phoneClient" [ngModelOptions]="{standalone:true}">
+      <p class="text-center h4 mt-1 m-0 p-0">
+        <small class="text-danger" *ngIf="phoneClient.invalid && (phoneClient.dirty || phoneClient.touched)">phone is
+          required</small>
+        <small class="text-danger"
+          *ngIf="phoneClient.invalid && (phoneClient.dirty || phoneClient.touched) && phoneClient.errors?.pattern">
+          phone not valid </small>
+      </p>
+    </div>
+    <div class="">
+      <textarea type="text" class="inp_box text_area" placeholder="Adress" #addressClient="ngModel" required
+        [(ngModel)]="orderOnline.addressClient" [ngModelOptions]="{standalone:true}"></textarea>
+      <p class="text-center h4 mt-1 m-0 p-0">
+        <small class="text-danger"
+          *ngIf="addressClient.invalid && (addressClient.dirty || addressClient.touched)">address is required</small>
+      </p>
+    </div>
+    <button class="btn2" type="submit" [disabled]="onlineOrder.form.invalid">Send Order</button>
+  </form>
+</div>
+
+<div>
+  the bill
+</div>

@@ -1,0 +1,77 @@
+
+    <div class=" d-flex flex-row justify-content-center align-items-center">
+        <div class="col-4"></div>
+        <p class="col-4 text-center text-primary fs-4">إذن صرف</p>
+        <div class="col-4 " style="text-align: left;">
+            <button (click)="onNoClick()" type="button" class="col-12 btn-close" aria-label="Close"></button>
+        </div>
+    </div>
+
+
+    <form #consumForm="ngForm" name="form"  novalidate  class="form-horizontal col-12" role="form"> 
+        <div class="card p-3" >
+
+        <div class="d-flex flex-row justify-content-center align-items-center p-2">
+            <div class="form-group col-sm-5 ms-4">
+                <label for="dataBill" class="col-sm-6  control-label fs-6 fw-bold">التاريخ</label>
+                <div class="col-sm-12">
+                    <input type="datetime-local" id="dataBill" name="dataBill" [(ngModel)]="ConsumBill.bill_date" class="form-control"
+                        required [class.is-invalid]="dateConsum.touched&&dateConsum.invalid" #dateConsum="ngModel" />
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="itemvalue" class="col-12 control-label fs-6 fw-bold">الاصناف</label>
+                <div class="col-12">
+                    <select [(ngModel)]="itemId"  id="itemvalue" (change)="selectitem()"
+                        name="itemvalue" class="form-select">
+                        <option *ngFor="let item of ItemsLst;" [value]="item.id">{{item.name}} 
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center align-items-center p-2">
+
+            <div class="form-group col-sm-5 ms-4">
+                <label for="quantityitem" class="col-sm-12 control-label fs-6 fw-bold">الكميه بالكيلو</label>
+                <div class="col-sm-12">
+                    <input type="number" min="1" oninput="validity.valid||(value='');" id="quantityitem" name="quantityitem" class="form-control" required
+                        [class.invalid]="quantityitem.touched&&quantityitem.invalid" #quantityitem="ngModel"
+                        [(ngModel)]="ConsumDetailsQuantity"   max="{{maxQuantity}}"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 mt-4">
+                <button style="margin-right: 50%;" type="button" class="btn btn-primary col-sm-6 " [disabled]="maxQuantity<=0" (click)="addItemsInBill()">إضافه
+                </button>
+            </div>
+
+        </div>
+
+        
+   
+</div>
+<br>
+<table class="w-100 table table-bordered  rounded text-center">
+    <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+        <th>#</th>
+        <th>الصنف</th>
+        <th>الكميه</th>
+        <th></th>
+    </tr>
+
+    <tr *ngFor="let details of ConsumBill.expensesDetailsModels;index as i">
+        <td>{{i+1}}</td>
+        <td>{{details.item_name}}</td>
+        <td>{{details.quantity}}</td>
+        <td>
+            <button style="border:none;" (click)="RemoveItemsFromBill(details)"><i class="bi bi-trash-fill"></i></button>
+        </td>
+    </tr>
+</table>
+<div class="d-flex flex-row   align-items-center p-2 pe-4">
+    <!-- <button type="button" (click)="onNoClick()" class="btn btn-danger col-4">إغلاق
+    </button> -->
+    <input style="margin-right: 70%;" type="submit" (click)="addBill(consumForm)" class="btn btn-primary  col-3" [value]="typeOperation" >
+</div>
+</form>

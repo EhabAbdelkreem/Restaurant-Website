@@ -1,0 +1,74 @@
+<div class=" p-1" dir="rtl">
+  <div class="d-flex">
+    <p style="margin-right:30%;" class="text-center text-primary fs-4">إضافه منتج</p>
+    <button style="margin-right:50%;" (click)="onNoClick()" type="button" class="btn-close  "
+      aria-label="Close"></button>
+  </div>
+
+  <div class="d-flex flex-row ">
+    <div class="col-12  ">
+      <form [formGroup]="uploadform" (ngSubmit)="onSubmit()" style="margin-right:4% ;" class="form-group col-11 d-flex flex-row">
+      
+          <div class="col-8">
+            <div class="d-flex flex-row">
+              <div class="form-group col-6  ">
+                <label for="Q" class="col-sm-4 control-label fs-6 fw-bold">اسم المنتج</label>
+                <div class="col-sm-10">
+                  <input type="text" id="Q" class="form-control" formControlName="product_name" (keypress)="keyPress($event)" />
+                  <!-- [(ngModel)]="prod.product_name" /> -->
+                </div>
+              </div>
+
+              <div class="form-group col-6">
+                <label for="item" class="col-sm-6 control-label fs-6 fw-bold"> مجموعات الاصناف</label>
+                <div class="col-sm-10">
+                  <select id="item" class="form-select" #role (change)='onSelected(role.value)'
+                    formControlName="cat_name">
+                    <!-- [(ngModel)]="prod.cat_name"> -->
+                    <option *ngFor="let cat of categories" [value]="cat.id"> {{cat.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+            <br>
+            <div class="d-flex flex-row">
+              <div class="form-group col-6">
+                <label for="Q" class="col-sm-6 control-label fs-6 fw-bold">الوصف</label>
+                <div class="col-sm-10">
+                  <input id="Q" class="form-control" formControlName="product_description" />
+                  <!-- [(ngModel)]="prod.product_description" /> -->
+                </div>
+              </div>
+
+              <div class="form-group col-sm-6 mt-1">
+                <label for="Q" class="col-sm-3 control-label fs-6 fw-bold">السعر</label>
+                <div class="col-sm-10">
+                  <input type="number" min=0  (keypress)="phkeyPress($event)" id="Q" class="form-control" 
+                  oninput="validity.valid||(value='');"
+                  formControlName="product_price" />
+                  <!-- [(ngModel)]="prod.product_price" /> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class=" " style="position: relative; width: 150px;height: 150px;">
+              <img style="position:absolute;width:100% ;height:100% ;display:block; " [src]="url" alt="..." class="img-thumbnail">
+            </div>
+            <div class=" ">
+              <input type="file" (change)="uploadFile($event)" required formControlName="product_imagePath">
+            </div>
+            <br><br>
+            <button style="width:90% ;" type="button" type="Submit" class="btn btn-primary" [disabled]="uploadform.invalid">اضافه
+            </button>
+          </div>
+
+
+        
+      </form>
+    </div>
+  </div>
+
+</div>

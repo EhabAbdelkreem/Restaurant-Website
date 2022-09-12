@@ -1,0 +1,115 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+ @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$admin-panel-layout-primary: mat-palette($mat-indigo);
+$admin-panel-layout-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$admin-panel-layout-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$admin-panel-layout-theme: mat-light-theme((
+  color: (
+    primary: $admin-panel-layout-primary,
+    accent: $admin-panel-layout-accent,
+    warn: $admin-panel-layout-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($admin-panel-layout-theme);
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$admin-panel-layout-primary: mat-palette($mat-indigo);
+$admin-panel-layout-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$admin-panel-layout-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$admin-panel-layout-theme: mat-light-theme((
+  color: (
+    primary: $admin-panel-layout-primary,
+    accent: $admin-panel-layout-accent,
+    warn: $admin-panel-layout-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($admin-panel-layout-theme);
+ @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  font-family: 'Droid Arabic Kufi', "Roboto", sans-serif;//"Montserrat", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+// body {
+//   margin: 0;
+//   font-family: "Roboto", "Helvetica Neue", sans-serif;
+// }
+
+html, body { height: 100%; }
+body {
+   margin: 0;
+    //font-family: 'Droid Arabic Kufi', "Roboto", sans-serif;//Roboto, "Helvetica Neue", sans-serif; 
+  }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+
+
+@font-face {
+  font-family: "Droid Arabic Kufi";
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.eot?#iefix)
+      format("embedded-opentype"),
+    url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.woff2)
+      format("woff2"),
+    url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.woff)
+      format("woff"),
+    url(//fonts.gstatic.com/ea/droidarabickufi/v6/DroidKufi-Regular.ttf)
+      format("truetype");
+}

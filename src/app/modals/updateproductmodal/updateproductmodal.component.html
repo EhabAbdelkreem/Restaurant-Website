@@ -1,0 +1,88 @@
+<div class=" p-1">
+  <div class="d-flex">
+    <p style="margin-right:30%;" class="text-center text-primary fs-4">تعديل منتج</p>
+    <button style="margin-right:50%;" (click)="onNoClick()" type="button" class="btn-close  "
+      aria-label="Close"></button>
+  </div>
+  <div class="d-flex flex-row container">
+    <div class="col-12  ">
+      <form [formGroup]="updateform" (ngSubmit)="onSubmit()"  class="form-horizontal col-12">
+
+        <div class="d-flex flex-row">
+          <div class="col-8">
+        <div class="d-flex flex-row">
+          <div class="form-group col-6  ">
+            <label for="Q" class="col-sm-10 control-label fs-6 fw-bold">اسم المنتج</label>
+            <div class="col-sm-12">
+              <input type="text" id="Q" class="form-control" formControlName="product_name"
+              [(ngModel)]="updateproduct.product_name"/>
+            </div>
+          </div>
+
+          <div class="form-group col-6" style="margin-right:4% ;">
+            <label for="item" class="col-sm-10 control-label fs-6 fw-bold"> مجموعات الاصناف</label>
+            <div class="col-sm-12">
+              <select id="item" class="form-select" #role (change)='onSelected(cat.id.toString())' formControlName="cat_name"
+                [(ngModel)]="updateproduct.cat_id">
+                <option *ngFor="let cat of categories" [value]="cat.id"> {{cat.name}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <br>
+        <div class="d-flex flex-row">
+          <div class="form-group col-6">
+            <label for="Q" class="col-sm-3 control-label fs-6 fw-bold">الوصف</label>
+            <div class="col-sm-12">
+              <input id="Q" class="form-control" formControlName="product_description"
+                [(ngModel)]="updateproduct.product_description" />
+            </div>
+          </div>
+
+          <div class="form-group col-6 " style="margin-right:4% ;">
+            <label for="Q" class="col-sm-3 control-label fs-6 fw-bold">السعر</label>
+            <div class="col-sm-12">
+              <input type="text" min="0" id="Q" class="form-control" formControlName="product_price"
+                [(ngModel)]="updateproduct.product_price" />
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="mess" style="height: 30%;"
+              class="alert alert-success d-flex align-items-center " role="alert">
+              <strong>تم التعديل بنجاح</strong>
+              <button style="margin-right: 70%;" (click)="removemessage()" type="button" data-bs-dismiss="alert"
+                  aria-label="Close">X</button>
+          </div>
+
+      </div>
+         
+        
+          <div class="col-2" style="padding-right:5% ;">
+        <div class="col-3 "  style="position: relative; width: 150px;height: 120px;">
+          <img style="position:absolute;width:100% ;height:100% ;display:block; margin-right: 10%;" 
+            src="{{updateproduct.product_imagePath}}" alt="..." class="img-thumbnail" >
+        </div>
+      
+
+        <div class="form-group">
+          <br>
+          
+
+      </div>
+        <div >
+          <input type="file" (change)="uploadFile($event)" formControlName="product_imagePath">
+        </div>
+        <br>
+        
+          <button style="width:100% ;margin-right: 40%;" type="Submit" class="btn btn-primary " [disabled]="updateform.invalid">حفظ
+          </button>
+        </div>
+        
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

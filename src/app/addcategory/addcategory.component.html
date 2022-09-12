@@ -1,0 +1,101 @@
+<div style="background-color: rgb(243, 242, 242);">
+    <div class="mb-3  mx-5 card px-5 py-4 col-11">
+        <p class="text-center text-primary fs-4">مجموعات ألاصناف</p>
+        <!-- <form #addform='ngForm' (ngSubmit)="addcategory()" style="margin-right:4% ;" class="form col-12"> -->
+        <form [formGroup]='categoryForm' (ngSubmit)='onFormSubmit()' style="margin-right:4% ;" class="form col-12">
+            <div class="d-flex flex-row">
+
+                <div class="form-group col-6">
+                    <label for="item" class="col-sm-6 control-label fs-6 fw-bold"> اسم المجموعه</label>
+                    <div class="col-sm-10">
+                        <input [(ngModel)]="categoryin.name" type="text" id="Q" class="form-control" (keypress)="keyPress($event)"
+                            formControlName="name" name="name" />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 mt-1">
+                    <label for="Q" class="col-sm-3 control-label fs-6 fw-bold"> الوصف</label>
+                    <div class="col-sm-10">
+                        <input [(ngModel)]="categoryin.description" type="text" id="Q" class="form-control" name="name"
+                            formControlName="description" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row">
+
+                <div class="form-group col-sm-8 mt-1">
+                    <br>
+                    <div *ngIf="message" style="margin-right:20% ;height: 30%;"
+                        class="alert alert-success d-flex align-items-center " role="alert">
+                        <strong>تم الحفظ بنجاح</strong>
+                        <button style="margin-right: 70%;" (click)="removemessage()" type="button"
+                            data-bs-dismiss="alert" aria-label="Close">X</button>
+                    </div>
+
+                </div>
+                <div class="form-group col-sm-4 mt-1">
+                    <button style="width:40% ;margin-right:42%;margin-top:5%;" type="button" type="Submit"
+                        class="btn btn-primary " [disabled]="categoryForm.invalid">حفظ
+                    </button>
+                </div>
+            </div>
+
+
+
+
+        </form>
+    </div>
+
+    <br>
+    <table style="width:90% ;margin-right: 5%;" class="table table-bordered 
+         rounded text-center">
+        <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;
+            " class="text-center">
+            <th>#</th>
+            <th>اسم المجموعه</th>
+            <th>الوصف</th>
+            <th> العمليات</th>
+        </tr>
+
+        <tr *ngFor="let category of cats | async ;index as i" [attr.id]="categoryin.id">
+            <td>{{ i+1}}</td>
+            <td>{{ category.name}}</td>
+            <td>{{ category.description}}</td>
+
+            <td>
+                <button (click)="editcategory(category.id)" style="border:none;"><i
+                        class="bi bi-pencil-square"></i></button>
+                <button style="border:none;" (click)="Deletecategory(category.id)">
+                    <i class="bi bi-trash-fill"></i></button>
+            </td>
+        </tr>
+        <!-- <tr >
+                <td>2</td>
+                <td>مقليات </td>
+                <td></td>
+                <td>
+                    <button style="border:none;"><i class="bi bi-pencil-square"></i></button>
+                    <button style="border:none;"><i class="bi bi-trash-fill"></i></button>
+                </td>
+            </tr>
+            <tr >
+                <td>3</td>
+                <td>وجبات </td>
+                <td></td>
+                <td>
+                    <button style="border:none;"><i class="bi bi-pencil-square"></i></button>
+                    <button style="border:none;"><i class="bi bi-trash-fill"></i></button>
+                </td>
+            </tr>
+            <tr >
+                <td>4</td>
+                <td>سلطات </td>
+                <td></td>
+                <td>
+                    <button style="border:none;"><i class="bi bi-pencil-square"></i></button>
+                    <button style="border:none;"><i class="bi bi-trash-fill"></i></button>
+                </td>
+            </tr> -->
+    </table>
+</div>

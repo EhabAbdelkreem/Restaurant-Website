@@ -1,0 +1,14 @@
+<div class="card">
+    <div routerLink="/user/products/{{data.product_id}}">
+        <img src="{{data.product_imagePath}}" alt="">
+        <!-- <div class="details"> -->
+            <div class="details-sub p-2">
+                <h4>Name : {{data.product_name}}</h4>
+                <h5 class="price">Price : {{data.product_price}}</h5>
+                <!-- <p>Description : {{data.product_description}}</p> -->
+            </div>
+            <!-- <p>{{data.product_description}}</p> -->
+        <!-- </div> -->
+    </div>
+    <button class="pt-2 pb-2"  (click)="add()">Add To Cart</button>
+</div>

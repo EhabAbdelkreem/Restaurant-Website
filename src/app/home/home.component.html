@@ -1,0 +1,62 @@
+<div style="background-color: rgb(243, 242, 242);">
+  <div class="mb-3  mx-5 card px-5 py-4 col-11">
+    <div class="d-flex">
+      <p style="margin-right:40%;" class="text-center text-primary fs-4">الطلبات</p>
+      <!-- <button style="margin-right:50%;" type="button" class="btn-close  " aria-label="Close"></button> -->
+    </div>
+    <button style="width:20% ;margin-right:75%; " mat-button (click)="openDialog(0,'Add')" type="button"
+      class="btn btn-primary col-sm-3 ">تسجيل الطلبات
+    </button>
+
+    <br>
+    <table style="width:90% ;margin-right: 5%;" class="table table-bordered  rounded text-center">
+      <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+        <th>#</th>
+        <th>التاريخ</th>
+        <th>النوع</th>
+        <th>الحاله</th>
+        <th>الاجمالي</th>
+        <th>العنوان</th>
+        <th>رقم الموبيل</th>
+        <th></th>
+      </tr>
+      <tr id="orderid-{{order.order_id}}" *ngFor="let order of OrderLst;index as i">
+        <!-- orderObject:IOrderModel= {:0,:null,orderType:.Delivery,
+      orderStatus:OrderStatus.Wait,AddressClient:'Address  ',nameClient:'انطونى اسحق جيد',notes:"Notes",phoneClient:'01225609831',username:'tony',totalPrice:0,orderDetailsModels:[]} -->
+        <td>{{i+1}}</td>
+        <td>{{order.order_date |date:'shortDate'}}</td>
+        <td id="orderType-{{order.order_id}}">{{order.orderType |typeStatusOrder:'type'}}</td>
+        <td id="orderStatus-{{order.order_id}}">{{order.orderStatus|typeStatusOrder:'status'}}</td>
+        <td>{{order.totalPrice}}</td>
+        <td>{{order.addressClient}}</td>
+        <td>{{order.phoneClient}}</td>
+        <td>
+          <div class="d-flex">
+            <button style="border:none;" mat-button (click)="openDialog(order.order_id,'Edit')"><i
+                class="bi bi-pencil-square"></i></button>
+            <div>
+              <button style="border:none;" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots-vertical"></i></button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')">الانتظار</a></li>
+                <!-- <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')"> جاري التحضير</a></li>
+            <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')"> جاري التسليم</a></li> -->
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Ok')"> تم التسليم</a></li>
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Cancel')"> مرفوض</a></li>
+              </ul>
+            </div>
+            <div>
+              <button style="border:none;" mat-button (click)="openDetails(order.order_id)">
+                <mat-icon><i class=" bi bi-receipt-cutoff"></i></mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <!-- <div class="form-group col-sm-6 mt-1 d-flex flex-row mx-5">
+  <label for="Q" class="col-sm-3 control-label fs-6 fw-bold">اجمالي الطلبات</label>
+  <input type="number" min="0" readonly id="Q" class=" col-6 text-center rounded" value="450" />
+</div> -->

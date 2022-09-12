@@ -1,0 +1,90 @@
+<div style="background-color: rgb(243, 242, 242);">
+  <div class="mb-3  mx-5 card px-5 py-4 col-11">
+    <p class="text-center text-primary fs-4">اضافه صنف</p>
+    <form style="margin-right:4% ;" class="form-horizontal col-12" (submit)="onSubmit(form)" #form="ngForm" novalidate>
+
+      <div class="d-flex flex-row">
+
+        <div class="form-group col-6">
+          <label for="item" class="col-sm-6 control-label fs-6 fw-bold"> اسم الصنف</label>
+          <div class="col-sm-10">
+            <input type="text" id="Q" class="form-control" name="ItemName" #ItemName="ngModel"
+              [(ngModel)]="serviceItems.ItemsData.name" required (keypress)="keyPress($event)"
+              [class.invalid]="ItemName.invalid && ItemName.touched" />
+            <small class="text-danger " *ngIf="ItemName.invalid && ItemName.touched">ادخل الاسم</small>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6 mt-1">
+          <label for="Q" class="col-sm-3 control-label fs-6 fw-bold"> الوصف</label>
+          <div class="col-sm-10">
+            <input type="text" id="Q" class="form-control" name="ItemDesc" #ItemDesc="ngModel"
+              [(ngModel)]="serviceItems.ItemsData.description" />
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- <div class="d-flex flex-row" >
+
+        <div class="form-group col-6 ">
+          <label for="item" class="col-sm-6 control-label fs-6 fw-bold"> السعر<br> بالكيلو</label>
+          <div class="col-sm-10">
+            <input type="number" id="Q" class="form-control" name="ItemPrice" #ItemPrice="ngModel"
+              [(ngModel)]="serviceItems.ItemsData.priceKilo" required
+              [class.invalid]="ItemPrice.invalid && ItemPrice.touched" />
+            <small class="text-danger " *ngIf="ItemPrice.invalid && ItemPrice.touched">ادخل السعر</small>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6 mt-1">
+          <label for="Q" class="col-sm-3 control-label fs-6 fw-bold"> الكميه المطلوبه</label>
+          <div class="col-sm-10">
+            <input type="number" id="Q" class="form-control" name="ItemQunt" #ItemQunt="ngModel"
+              [(ngModel)]="serviceItems.ItemsData.expectedQuantityInDay" required
+              [class.invalid]="ItemQunt.invalid && ItemQunt.touched" />
+            <small class="text-danger " *ngIf="ItemQunt.invalid && ItemQunt.touched">ادخل الكميه</small>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="d-flex flex-row">
+
+        <div class="form-group col-sm-6 mt-1">
+        </div>
+        <div class="form-group col-sm-6 mt-1">
+          <button style="width:40% ;margin-right:42%;margin-top:5%;" type="submit" class="btn btn-primary"
+            [disabled]="form.invalid">اضافه
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br>
+  <table style="width:90% ;margin-right: 5%;" class="table table-bordered  rounded text-center">
+    <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+      <th>#</th>
+      <th>اسم الصنف</th>
+      <!-- <th>السعر بالكيلو</th> -->
+      <th>الكميه المتاحة </th>
+      <th>الوصف</th>
+      <th> </th>
+    </tr>
+
+    <tr *ngFor="let item of serviceItems.listItems;index as i">
+      <td>{{i+1}}</td>
+      <td>{{item.name}}</td>
+      <!-- <td>{{item.priceKilo}}</td> -->
+      <td>{{item.totalQuantity}}</td>
+      <td>{{item.description}}</td>
+      <td>
+        <button style="border:none;" (click)="updatitem(item)"><i class="bi bi-pencil-square"></i></button>
+        <button style="border:none;" (click)="deletitem(item.id)"><i class="bi bi-trash-fill"></i></button>
+      </td>
+    </tr>
+
+  </table>
+</div>

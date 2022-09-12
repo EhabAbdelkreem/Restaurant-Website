@@ -1,0 +1,44 @@
+<mat-toolbar >
+  <mat-toolbar-row class="justify-content-between" style="background-color:#0473b9 ; color:white;height:50px;margin-right:1%;border-radius:3px ;">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div  style="margin-right:70%;" class="row mr-2 ml-auto ">
+      <ul class="row m-0 align-items-center">
+        <li>
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu"
+            class="user mt-2 d-flex align-items-center"
+          >
+            <img src="../../assets/images.png" alt="" class="user-image mr-1 p-2" />
+           {{username}}
+            <mat-icon class="user-image-icon ml-1"
+            >keyboard_arrow_down</mat-icon >
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()"> <mat-icon>exit_to_app</mat-icon> Logout</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+    <!-- <button ><i class="bi bi-bell"></i></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item> <mat-icon>exit_to_app</mat-icon> طلب 1</button>
+    </mat-menu> -->
+
+    <div  >
+          <!-- <button  routerLink="/admin/onlineOrder" data-bs-toggle="dropdown" 
+       
+          ><i class="bi bi-bell-fill " [style.color]="notification">
+          </i></button> -->
+          <!-- <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" mat-button (click)="openDialog()" >طلب 1</a></li>
+            <li><a class="dropdown-item" href="#">طلب 2</a></li>
+            <li><a class="dropdown-item" href="#">طلب 3</a></li>
+          </ul> -->
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+

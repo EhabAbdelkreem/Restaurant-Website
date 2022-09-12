@@ -1,0 +1,83 @@
+<div class="card mx-5 p-3">
+    <div class="mx-4">
+        <p class="text-center text-primary fs-4">إضافة مستخدم</p>
+    </div>
+    <form class="px-5 mx-5" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+        <div class="d-flex flex-row">
+            <div class="form-group col-6">
+                <label for="username" class="col-sm-6 control-label fs-6 fw-bold">اسم المستخدم</label>
+                <div class="col-sm-10">
+                <input type="text" formControlName="username" class="form-control" id="username" (keypress)="keyPress($event)"
+                    [(ngModel)]="users.username">
+            </div></div>
+            <div class="form-group col-sm-6 mt-1">
+                <label for="exampleInputPassword1" class="col-sm-3 control-label fs-6 fw-bold">كلمة المرور</label>
+                <div class="col-sm-10">
+                <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1"
+                    [(ngModel)]="users.password">
+            </div>
+        </div>
+        </div>
+        <div class="d-flex flex-row">
+            <div class="form-group col-6">
+                <label for="name" class="col-sm-3 control-label fs-6 fw-bold">الاسم </label>
+                <div class="col-sm-10">
+                <input type="text" formControlName="user_name" (keypress)="keyPress($event)" class="form-control" id="userrealname"
+                    [(ngModel)]="users.user_name">
+            </div>
+        </div>
+            <div class="form-group col-6">
+                <label for="roleid" class="col-sm-3 control-label fs-6 fw-bold">الصلاحية </label>
+                <div class="col-sm-10">
+                <select  #role (change)="onSelected(role.value)"
+                    [(ngModel)]='users.permission' class="form-select" formControlName="permission"
+                    style="display:inline-flex;">
+                    <option *ngFor="let permission of permissions" [value]="permission">{{permission}} </option>
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="d-flex flex-row">
+            <div class="form-group col-sm-8 mt-1">
+                <br>
+                <div *ngIf="mess" style="margin-right:20% ;height: 30%;"
+                    class="alert alert-success d-flex align-items-center " role="alert">
+                    <strong>تم الحفظ بنجاح</strong>
+                    <button style="margin-right: 70%;" (click)="removemessage()" type="button" data-bs-dismiss="alert"
+                        aria-label="Close">X</button>
+                </div>
+
+            </div>
+            <div class="form-group col-sm-4 mt-1">
+                <button style="width:40% ;margin-right:42%;margin-top:5%;" type="button" type="Submit"
+                    class="btn btn-primary " [disabled]="userForm.invalid">حفظ
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="mt-3">
+    <table style="width:90% ;margin-right: 5%;" class="table table-bordered  rounded text-center">
+        <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+            <th>الرقم </th>
+            <th>الاسم </th>
+            <th>اسم المستخدم</th>
+            <th>الصلاحية</th>
+            <th></th>
+        </tr>
+
+        <tr *ngFor="let user of users">
+            <td>{{user.user_id}}</td>
+            <td>{{user.user_name}}</td>
+            <td>{{user.username}}</td>
+            <td> {{user.permission}}</td>
+            <td>
+                <button style="border:none;"><i class="bi bi-pencil-square"
+                        (click)="edituser(user.user_id)"></i></button>
+                <button style="border:none;"><i class="bi bi-trash-fill"
+                        (click)="Deleteuser(user.user_id)"></i></button>
+            </td>
+        </tr>
+       
+    </table>
+</div>

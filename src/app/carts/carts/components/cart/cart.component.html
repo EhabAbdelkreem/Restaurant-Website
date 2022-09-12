@@ -1,0 +1,51 @@
+<div class="cartBox">
+    <h1 class="text-danger">shoppping cart</h1>
+  <div class="headcart">
+    <p class="lead">you have <label class="text-danger">{{cartProducts.length}}</label>in your cart</p>
+    <span class="text-danger card-header" (click)="clearCart()">clear shopping cart</span>
+  </div>
+  <table class="table table-striped">
+    <thead class="text-center">
+        <tr >
+            <th>Image</th>
+            <th>Name</th>
+            <th>price</th>
+            <th style="width:25% ;"> Quantity</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr *ngFor="let item of cartProducts let index =index">
+        <td><img src="{{item.item.product_imagePath}}" alt="" srcset=""></td>
+        <td>{{item.item.product_name}}</td>
+        <td>{{item.item.product_price}}L.E</td>
+        <td>
+            <div class="quantity">
+                <button class="btn btn-dark"  (click)="AddAmount(index)">+</button>
+                <input class="form-control" type="number"(change)="detectChange()" [(ngModel)]="item.quantity"  min = 0  oninput="validity.valid||(value='');">
+                <button class="btn btn-dark" [disabled]="item.quantity==1" (click)="MinsAmount(index)">-</button>
+            </div>
+        </td>
+        <td>{{ item.item.product_price * item.quantity}} L.E</td>
+        <td>
+            <button class="btn btn-danger" (click)="deleteproduct(index)">Delete</button>
+
+        </td>
+    </tr>
+
+  </tbody>
+  <tfoot>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>total: {{total}} L.E</th>
+        <th> <a class="btn btn-success"  routerLink="/user/personalData">order Now</a></th>
+    </tr>
+  </tfoot>
+</table>   
+
+<!-- </div>
+<div class="alert alert-success" role="alert"><strong>well done!</strong>your order is successfully send</div> -->

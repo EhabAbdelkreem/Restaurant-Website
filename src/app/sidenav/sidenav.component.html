@@ -1,0 +1,48 @@
+<mat-nav-list>
+  <div class="logo py-4">
+    <img style="width: 60%; border-radius: 55%;" src="./assets/fresh.webp" alt="Company Logo" />
+    <p style="color: white;font-size:12px ;" class="mt-2">مطعم سى فوود لأشهى المأكولات </p>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div *ngIf="Role">
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/home">
+      <mat-icon><i class="bi bi-house-door"></i></mat-icon>&nbsp; الطلبات
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/onlineOrder">
+      <mat-icon><i class="bi bi-cart-fill"></i></mat-icon>&nbsp; الطلبات الاونلاين
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/Allorder">
+      <mat-icon>dashboard</mat-icon>&nbsp; كل الطلبات 
+    </a>
+    
+ 
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/purchases">
+      <mat-icon><i class="bi bi-bag-fill"></i></mat-icon>&nbsp; المشتريات
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/consumption">
+      <mat-icon>dashboard</mat-icon>&nbsp; المصروفات
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/items">
+      <mat-icon>dashboard</mat-icon>&nbsp; اضافه صنف
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/add-user">
+      <mat-icon><i class="bi bi-person-plus-fill"></i></mat-icon> &nbsp; اضافه مستخدم
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/addproduct">
+      <mat-icon>dashboard</mat-icon> إضافه منتج
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/addcategory">
+      <mat-icon>dashboard</mat-icon> مجموعات الاصناف
+    </a>
+
+  </div>
+  <div *ngIf="!Role">
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/home">
+      <mat-icon><i class="bi bi-house-door"></i></mat-icon>&nbsp; الطلبات
+    </a>
+    <a class="fs-6" mat-list-item routerLinkActive="list-item-active" routerLink="/admin/onlineOrder">
+      <mat-icon><i class="bi bi-cart-fill"></i></mat-icon>&nbsp; الطلبات الاونلاين
+    </a>
+  </div>
+</mat-nav-list>

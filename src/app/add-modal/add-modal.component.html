@@ -1,0 +1,117 @@
+
+    <div class=" d-flex flex-row justify-content-center align-items-center">
+        <div class="col-4"></div>
+        <p class="col-4 text-center text-primary fs-4">{{TitlePurchases}}</p>
+        <div class="col-4 " style="text-align: left;">
+            <button (click)="onNoClick()" type="button" class="btn-close col-12  " aria-label="Close"></button>
+        </div>
+    </div>
+
+    <form #purchasesForm="ngForm" name="form"  novalidate   class="form-horizontal col-12" role="form"> 
+        <div class="card p-2" >
+        <div class="d-flex flex-row justify-content-center align-items-center p-2">
+            <div class="form-group col-sm-5 ms-4">
+                <label for="dob" class="col-sm-12 control-label fs-6 fw-bold">التاريخ</label>
+                <div class="col-sm-12">
+                    <input type="datetime-local" #datePur="ngModel" required [class.is-invalid]="datePur.touched&&datePur.isvalid" name="dob" [(ngModel)]="PurchasesObject.bill_date" id="dob" class="form-control" ngModel />
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="itemvalue" class="col-12 control-label fs-6 fw-bold">الصنف</label>
+                <div class="col-12">
+                    <select [(ngModel)]="itemId"  id="itemvalue"
+                        name="itemvalue" class="form-select">
+                        <option *ngFor="let item of ItemsLst;" [value]="item.id">{{item.name}} 
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center align-items-center p-2">
+            <div class="form-group col-sm-5 ms-4">
+                <label for="PurchasesDetailsQuantity" class="col-sm-12 control-label fs-6 fw-bold">الكميه بالكيلو</label>
+                <div class="col-sm-12">
+                    <input type="number" name="PurchasesDetailsQuantity" min=1 oninput="validity.valid||(value='');" id="PurchasesDetailsQuantity" 
+                    [(ngModel)]="PurchasesDetailsQuantity" class="form-control" ngModel 
+                    #quantityPur="ngModel" required [class.is-invalid]="quantityPur.touched&&quantityPur.isvalid"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="PurchasesDetailsPrice" class="col-sm-12 control-label fs-6 fw-bold"> سعر الكيلو</label>
+                <div class="col-sm-12">
+                    <input type="number" min=0 oninput="validity.valid||(value='');" id="PurchasesDetailsPrice" name="PurchasesDetailsPrice" class="form-control" ngModel 
+                    [(ngModel)]="PurchasesDetailsPrice"
+                    #pricePur="ngModel" required [class.is-invalid]="pricePur.touched&&pricePur.invalid"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center align-items-center mb-1">
+            <div class="form-group col-sm-5 ms-4">
+                <label for="vendorName" class="col-sm-12 control-label fs-6 fw-bold"> البائع</label>
+                <div class="col-sm-12">
+                    <input type="text" id="vendorName" name="vendorName" [(ngModel)]="PurchasesObject.vendorName" class="form-control" ngModel 
+                    (keypress)="keyPress($event)"   #vendorPur="ngModel" required [class.is-invalid]="vendorPur.touched&&vendorPur.invalid" />
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <div style="margin-right:30% ;" mat-dialog-actions>
+                    <br>
+                    <button   class="btn btn-primary col-6 "
+                         (click)="addItemsInBill()" [disabled]="purchasesForm.form.invalid">إضافه</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="d-flex flex-row justify-content-around align-items-center mt-2">
+            <input style="width: 25%;" (click)="addBill(purchasesForm)" type="button" class="btn btn-primary"
+             [value]="typeOperation" [disabled]="purchasesForm.form.invalid">
+            <button style="width: 25%;" type="button" (click)="onNoClick()"
+                class="btn btn-danger  ">إغلاق
+            </button>
+        </div> -->
+
+</div>
+
+<br>
+<table class="w-100 table table-bordered  rounded text-center">
+    <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+        <th>#</th>
+        <th>الصنف</th>
+        <th>الكميه</th>
+        <th>السعر</th>
+        <th></th>
+    </tr>
+
+    <tr  *ngFor="let details of PurchasesObject.purchasesSalesDetailsModels;index as i">
+        <td>{{i+1}}</td>
+        <td>{{details.item_name}}</td>
+        <td>{{details.quantity}}</td>
+        <td>{{details.price}}</td>
+        <td>
+            <button style="border:none;" (click)="RemoveItemsFromBill(details)"><i class="bi bi-trash-fill"></i></button>
+        </td>
+    </tr>
+   
+</table>
+
+<!-- <div class=" d-flex flex-row justify-content-between align-items-center ">
+    <label for="totalPrice" class=" col-sm-3 control-label fs-6 fw-bold">اجمالي الفاتوره</label>
+    <input type="number" style="border: none;outline: 2px solid lightgray;" min="0" readonly id="totalPrice"
+        class=" col-sm-3 text-center rounded p-2"  name="totalPrice" [(ngModel)]="PurchasesObject.totalPrice"/>
+</div> -->
+
+<div class="card p-2 d-flex flex-row justify-content-center align-items-center">
+    <label for="Q" class=" control-label  fs-6 fw-bold ms-2">اجمالي الفاتوره</label>
+    <input type="number" min="0" id="totalPrice" name="totalPrice" class="text-center rounded "
+      [(ngModel)]="PurchasesObject.totalPrice" />
+    <div class="d-flex flex-row justify-content-center align-items-center w-50">
+      <input style="width: 35%;" (click)="addBill(purchasesForm)" type="button" class="btn btn-primary"
+      [value]="typeOperation" [disabled]="purchasesForm.form.invalid">
+      <button style="width: 15% ;margin-right:1%;" type="button" (click)="onNoClick()"
+        class="w-50 btn btn-danger  ">إغلاق
+      </button>
+    </div>
+  </div>
+</form>

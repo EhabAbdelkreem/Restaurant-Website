@@ -1,0 +1,54 @@
+<div style="background-color: rgb(243, 242, 242);">
+  <div class="mb-3  mx-5 card px-5 py-4 col-11">
+    <div class="d-flex">
+      <p style="margin-right:40%;" class="text-center text-primary fs-4">الطلبات</p>
+    </div>
+    <br>
+    <table style="width:90% ;margin-right: 5%;" class="table table-bordered  rounded text-center">
+      <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+        <th>#</th>
+        <th>التاريخ</th>
+        <th>النوع</th>
+        <th>الحاله</th>
+        <th>الاجمالي</th>
+        <th>العنوان</th>
+        <th>رقم الموبيل</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let order of OrderLst; let i =index">
+        <td>{{i+1}}</td>
+        <td>{{order.order_date |date:'shortDate'}}</td>
+        <td id="orderType-{{order.order_id}}">{{order.orderType |typeStatusOrder:'type'}}</td>
+        <td id="orderStatus-{{order.order_id}}">{{order.orderStatus|typeStatusOrder:'status'}}</td>
+        <td>{{order.totalPrice}}</td>
+        <td>{{order.addressClient}}</td>
+        <td>{{order.phoneClient}}</td>
+        <td>
+          <div class=" d-flex flex-row justify-content-center align-items-center ">
+            <div>
+              <button style="border:none;" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots-vertical"></i></button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')">الانتظار</a></li>
+                <!-- <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')"> جاري التحضير</a></li>
+              <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Wait')"> جاري التسليم</a></li> -->
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Ok')"> تم التسليم</a></li>
+                <li><a class="dropdown-item" (click)="changeTypeOrder(order.order_id,'Cancel')"> مرفوض</a></li>
+              </ul>
+            </div>
+            <div>
+              <button style="border:none;" mat-button (click)="openDialog(order.order_id)">
+                <i class=" bi bi-receipt-cutoff"></i>
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- <button style="border:none;" mat-button (click)="openDialog(0)">
+  <i class="h2 bi bi-receipt-cutoff"></i>
+</button> -->

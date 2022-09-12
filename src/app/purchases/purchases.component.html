@@ -1,0 +1,34 @@
+<p class="text-center text-primary fs-4">المشتريات</p>
+<button style="width:15% ;margin-right:80%; " mat-button (click)="openDialog(0,'Add')" type="button"
+  class="btn btn-primary col-sm-3 ">إضافه
+</button>
+<br>
+<br>
+<table style="width:90% ;margin-right: 5%;" class="table table-bordered  rounded text-center">
+  <tr style="background-color:#0473b9 ; color:white;height:30px;font-size: 15px;" class="text-center">
+    <th>#</th>
+    <th>التاريخ</th>
+    <th>إجمالي الفاتوره</th>
+    <th>البائع</th>
+    <th></th>
+  </tr>
+
+  <tr *ngFor="let purchases of PurchasesLst;index as i">
+    <td>{{i+1}}</td>
+    <td>{{purchases.bill_date | date:'short'}}</td>
+    <td>{{purchases.totalPrice | currency}}</td>
+    <td>{{purchases.vendorName}}</td>
+    <td>
+      <button style="border:none;" mat-button (click)="openDialog(purchases.bill_id,'Edit')"><i
+          class="bi bi-pencil-square"></i></button>
+      <button style="border:none;" (click)="deleteOnePurchasesInD(purchases.bill_id)"><i class="bi bi-trash-fill"></i></button>
+    </td>
+  </tr>
+
+</table>
+
+<!-- <div class="form-group col-sm-6 mt-1 d-flex flex-row mx-5">
+  <label for="Q" class="col-sm-3 control-label fs-6 fw-bold">اجمالي الفاتوره</label>
+  <input type="number" min="0" readonly id="Q" class=" col-6 text-center rounded" value="260" />
+</div> -->
+
